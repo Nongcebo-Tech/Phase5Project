@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: CICD-Demo-Deployment
+spec:
+  selector:
+    matchLabels:
+      app: CICD-Demo-App
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: CICD-Demo-App
+    spec:
+      containers:
+      - name: CICD-Demo-App
+        image: helderklemp/cicd-demo:latest
+        ports:
+        - containerPort: 8080
+          name: server
+        - containerPort: 8081
+          name: management
+        # livenessProbe:
+        #   httpGet:
+        #     path: /actuator/health
+        #     port: 8080
+        readinessProbe:
+          initialDelaySeconds: 30
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          
+        
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: CICD-Demo-Service
+spec:
+  type: LoadBalancer
+  selector:
+    app: CICD-Demo-App
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+
+          

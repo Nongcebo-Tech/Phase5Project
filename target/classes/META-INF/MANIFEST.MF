@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Thanda
+Build-Jdk: 21.0.3
+Implementation-Title: Phase5Project
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.spring.boot
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/spring-boot-project
+Created-By: Maven Integration for Eclipse
+
